@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Food 
+public class Food
 {
     private Vector2Int foodGridPosition;
     private Snake snake;
@@ -23,23 +23,23 @@ public class Food
         this.snake = snake;
     }
 
-   
+
 
     public void spawnFoodOnScreen()
     {
-        
+
         foodGridPosition = new Vector2Int(Random.Range(0, width), Random.Range(0, height));
         foodGameObject = new GameObject("Food", typeof(SpriteRenderer));
         foodGameObject.GetComponent<SpriteRenderer>().sprite = GameAssets.i.foodsprite;
         foodGameObject.transform.position = new Vector3(foodGridPosition.x, foodGridPosition.y);
-        Debug.Log("spawing food"+foodGridPosition);
+        // Debug.Log("spawing food"+foodGridPosition);
     }
 
     public bool SnakeAtefood(Vector2Int snakeGridPosition)
     {
         if (foodGridPosition == snakeGridPosition)
         {
-            Debug.Log("snake Ate Food");
+            // Debug.Log("snake Ate Food");
             Object.Destroy(foodGameObject);
             spawnFoodOnScreen();
             return true;

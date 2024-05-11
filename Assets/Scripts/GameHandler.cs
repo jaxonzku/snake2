@@ -8,8 +8,8 @@ public class GameHandler : MonoBehaviour
     private Food food;
     void Start()
     {
-        Debug.Log("handler runnning");
-        food = new Food(30,20);
+        // Debug.Log("handler runnning");
+        food = new Food(30, 20);
         snake.SetUp(food);
         food.SetUp(snake);
     }

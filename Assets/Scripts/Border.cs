@@ -16,7 +16,7 @@ public class Border : MonoBehaviour
 
         }
 
-        Debug.Log("setup done");
+        // Debug.Log("setup done");
     }
 
     void Update()
