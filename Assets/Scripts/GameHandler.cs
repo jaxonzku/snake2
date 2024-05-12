@@ -9,7 +9,7 @@ public class GameHandler : MonoBehaviour
     void Start()
     {
         // Debug.Log("handler runnning");
-        food = new Food(30, 20);
+        food = new Food(33, 17);
         snake.SetUp(food);
         food.SetUp(snake);
     }
