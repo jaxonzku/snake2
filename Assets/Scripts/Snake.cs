@@ -15,9 +15,13 @@ public class Snake : MonoBehaviour
     private Vector3Int bodyRotation;
     private Food food;
     private int snakeBodyCount;
-    private List<Vector2Int> snakeBodyPositions;
+    public List<Vector2Int> snakeBodyPositions;
+    private List<Vector2Int> snakeBodyWithFoodPositions;
     private List<Vector3Int> snakeBodyRotations;
     private List<GameObject> snakeBodyGameObjects;
+    private int player;
+    public ScoreController scoreController;
+
     private enum Direction
     {
         Left,
@@ -33,25 +37,30 @@ public class Snake : MonoBehaviour
         gridMoveTimer = gridMoveTimerMax;
         snakeBodyCount = 1;
     }
-    public void SetUp(Food food)
+    public void SetUp(Food food, int player)
     {
         this.food = food;
+        this.player = player;
+
     }
+
     void Start()
     {
         food.spawnFoodOnScreen();
+
         snakeBodyPositions = new List<Vector2Int>(snakeBodyCount);
         snakeBodyRotations = new List<Vector3Int>(snakeBodyCount);
         snakeBodyPositions.Insert(snakeBodyCount - 1, new Vector2Int(0, 0));
         snakeBodyRotations.Insert(snakeBodyCount - 1, new Vector3Int(0, 0, 0));
         snakeBodyGameObjects = new List<GameObject>(snakeBodyCount);
         snakeBody = new SnakeBody();
-        snakeBodyGameObjects.Insert(snakeBodyCount - 1, snakeBody.CreateABody());
+        snakeBodyGameObjects.Insert(snakeBodyCount - 1, snakeBody.CreateABody(player));
     }
     void Update()
     {
         HandleGridMovement();
         HandleInput();
+        BorderHit();
     }
 
     private void HandleGridMovement()
@@ -88,18 +97,20 @@ public class Snake : MonoBehaviour
             snakeBodyPositions[snakeBodyCount - 1] = gridPosition;
             HandleEachMove();
         }
+        CheckFoodProximity(food.foodGridPosition);
+
         bool snakeAteFood = food.SnakeAtefood(gridPosition);
         if (snakeAteFood)
         {
             snakeBodyCount++;
             snakeBodyPositions.Add(new Vector2Int(0, 0));
             snakeBodyRotations.Add(new Vector3Int(0, 0, 0));
-            snakeBodyGameObjects.Add(snakeBody.CreateABody());
+            snakeBodyGameObjects.Add(snakeBody.CreateABody(player));
             if (CheckSelfCollision())
             {
                 SceneManager.LoadScene(0);
-                Debug.Log("Snake collided with itself!");
             }
+            scoreController.IncrementScore(5);
         }
 
     }
@@ -120,28 +131,27 @@ public class Snake : MonoBehaviour
                 snakeBodyGameObjects[i - 1].GetComponent<SpriteRenderer>().sprite = GameAssets.i.SnakeBody;
                 snakeBodyPositions[i] = snakeBodyPositions[i - 1];
                 snakeBodyRotations[i] = snakeBodyRotations[i - 1];
+                snakeBodyGameObjects[i - 1] = snakeBodyGameObjects[i - 1];
             }
             snakeBodyPositions[0] = gridPosition;
             snakeBodyRotations[0] = bodyRotation;
         }
         if (CheckSelfCollision())
         {
-            Debug.Log("Snake collided with itself!");
             SceneManager.LoadScene(0);
         }
     }
 
     class SnakeBody
     {
-        public GameObject CreateABody()
+        public GameObject CreateABody(int player)
         {
-            GameObject newBody = new("snakebody", typeof(SpriteRenderer));
-            newBody.transform.position = new Vector2(100, 100);
-            newBody.transform.position = new Vector2(100, 100);
+            GameObject newBody = new("snakebody" + player.ToString(), typeof(SpriteRenderer));
+            newBody.transform.position = new Vector2(200, 200);
             Vector3 rotationEulerAngles = new Vector3(0, 0, 0);
             Quaternion rotationQuaternion = Quaternion.Euler(rotationEulerAngles);
             newBody.transform.rotation = rotationQuaternion;
-            newBody.GetComponent<SpriteRenderer>().sprite = GameAssets.i.Snakehead;
+            newBody.GetComponent<SpriteRenderer>().sprite = GameAssets.i.SnakeHead;
             return newBody;
         }
     }
@@ -187,6 +197,60 @@ public class Snake : MonoBehaviour
             }
         }
         return false;
+    }
+
+    public void CheckFoodProximity(Vector2Int foodPosition)
+    {
+        float distance = Vector2Int.Distance(gridPosition, foodPosition);
+        float thresholdDistance = 1; // You can adjust this value as needed
+        if (distance <= thresholdDistance)
+        {
+
+            if (snakeBodyCount == 1)
+            {
+                snakeBodyGameObjects[index: 0].gameObject.GetComponent<SpriteRenderer>().sprite = GameAssets.i.SnakeHeadOpen;
+
+            }
+            else
+            {
+                snakeBodyGameObjects[index: snakeBodyCount - 1].gameObject.GetComponent<SpriteRenderer>().sprite = GameAssets.i.SnakeHeadOpen;
+            }
+        }
+        else
+        {
+            snakeBodyGameObjects[index: snakeBodyCount - 1].gameObject.GetComponent<SpriteRenderer>().sprite = GameAssets.i.SnakeHead;
+        }
+
+    }
+
+    public void BorderHit()
+    {
+
+
+        if (snakeBodyPositions[0].x == 34)
+        {
+            gridPosition = new Vector2Int(-34, snakeBodyPositions[0].y);
+        }
+        if (snakeBodyPositions[0].x == -34)
+        {
+            gridPosition = new Vector2Int(34, snakeBodyPositions[0].y);
+        }
+        if (snakeBodyPositions[0].y == 15)
+        {
+            gridPosition = new Vector2Int(snakeBodyPositions[0].x, -18);
+        }
+        if (snakeBodyPositions[0].y == -18)
+        {
+            gridPosition = new Vector2Int(snakeBodyPositions[0].x, 15);
+        }
+
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("boreder"))
+        {
+            Debug.Log("hottt hitt");
+        }
     }
     public Vector2Int GetSnakePosition()
     {

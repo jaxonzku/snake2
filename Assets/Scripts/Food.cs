@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Food
 {
-    private Vector2Int foodGridPosition;
+    public Vector2Int foodGridPosition;
     private Snake snake;
+
+
     private int width;
     private int height;
     private GameObject foodGameObject;
@@ -23,16 +25,29 @@ public class Food
         this.snake = snake;
     }
 
+    private Vector2Int randomRangeGenerate()
+    {
 
+        Vector2Int randomLoc = new Vector2Int(Random.Range(0, width),
+           Random.Range(0, height));
+        if (!snake.snakeBodyPositions.Contains(randomLoc))
+        {
+            return randomLoc;
+        }
+        else
+        {
+            return randomRangeGenerate();
+        }
+
+
+    }
 
     public void spawnFoodOnScreen()
     {
-
-        foodGridPosition = new Vector2Int(Random.Range(0, width), Random.Range(0, height));
+        foodGridPosition = randomRangeGenerate();
         foodGameObject = new GameObject("Food", typeof(SpriteRenderer));
         foodGameObject.GetComponent<SpriteRenderer>().sprite = GameAssets.i.foodsprite;
         foodGameObject.transform.position = new Vector3(foodGridPosition.x, foodGridPosition.y);
-        // Debug.Log("spawing food"+foodGridPosition);
     }
 
     public bool SnakeAtefood(Vector2Int snakeGridPosition)
