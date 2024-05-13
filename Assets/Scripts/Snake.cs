@@ -43,7 +43,6 @@ public class Snake : MonoBehaviour
         this.player = player;
 
     }
-
     void Start()
     {
         food.spawnFoodOnScreen();
@@ -62,7 +61,6 @@ public class Snake : MonoBehaviour
         HandleInput();
         BorderHit();
     }
-
     private void HandleGridMovement()
     {
         gridMoveTimer += Time.deltaTime;
@@ -116,8 +114,6 @@ public class Snake : MonoBehaviour
 
 
     }
-
-
     private void HandleEachMove()
     {
         for (int i = 0; i < snakeBodyCount; i++)
@@ -143,7 +139,6 @@ public class Snake : MonoBehaviour
             SceneManager.LoadScene(0);
         }
     }
-
     class SnakeBody
     {
         public GameObject CreateABody(int player)
@@ -157,7 +152,6 @@ public class Snake : MonoBehaviour
             return newBody;
         }
     }
-
     private void HandleInput()
     {
         if (Input.GetKeyDown(KeyCode.UpArrow))
@@ -200,7 +194,6 @@ public class Snake : MonoBehaviour
         }
         return false;
     }
-
     public void CheckFoodProximity(Vector2Int foodPosition)
     {
         float distance = Vector2Int.Distance(gridPosition, foodPosition);
@@ -224,7 +217,6 @@ public class Snake : MonoBehaviour
         }
 
     }
-
     public void BorderHit()
     {
 
