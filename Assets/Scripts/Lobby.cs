@@ -11,4 +11,11 @@ public class Lobby : MonoBehaviour
         SceneManager.LoadScene(1);
 
     }
+
+    public void Start2Player()
+    {
+
+        SceneManager.LoadScene(2);
+
+    }
 }
