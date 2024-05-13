@@ -48,6 +48,9 @@ public class Snake : MonoBehaviour
     {
         food.spawnFoodOnScreen();
 
+
+
+
         snakeBodyPositions = new List<Vector2Int>(snakeBodyCount);
         snakeBodyRotations = new List<Vector3Int>(snakeBodyCount);
         snakeBodyPositions.Insert(snakeBodyCount - 1, new Vector2Int(0, 0));
@@ -100,6 +103,7 @@ public class Snake : MonoBehaviour
         CheckFoodProximity(food.foodGridPosition);
 
         bool snakeAteFood = food.SnakeAtefood(gridPosition);
+        // bool snakeAteCreature = food.SnakeAteCreature(gridPosition);
         if (snakeAteFood)
         {
             snakeBodyCount++;
@@ -110,8 +114,28 @@ public class Snake : MonoBehaviour
             {
                 SceneManager.LoadScene(0);
             }
-            scoreController.IncrementScore(5);
+            scoreController.IncrementScore(snakeAteFood ? 5 : 10);
+            // if (food.creatureObject == null)
+            // {
+            //     food.spawnCreature();
+            // }
+
         }
+        // bool snakeAteCreature = food.SnakeAteCreature(gridPosition);
+        // if (snakeAteCreature)
+        // {
+        //     Debug.Log("loopintg");
+        //     snakeBodyCount++;
+        //     snakeBodyPositions.Add(new Vector2Int(0, 0));
+        //     snakeBodyRotations.Add(new Vector3Int(0, 0, 0));
+        //     snakeBodyGameObjects.Add(snakeBody.CreateABody(player));
+        //     if (CheckSelfCollision())
+        //     {
+        //         SceneManager.LoadScene(0);
+        //     }
+        //     scoreController.IncrementScore(10);
+
+        // }
 
     }
 

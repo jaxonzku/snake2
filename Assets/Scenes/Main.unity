@@ -734,6 +734,7 @@ MonoBehaviour:
   SnakeHead: {fileID: 21300000, guid: bf202030c56834a48821b5efa056e674, type: 3}
   SnakeHeadOpen: {fileID: 21300000, guid: 41001f77606bfda4da6e0a4794deab1f, type: 3}
   SnakeHeadChange: {fileID: 21300000, guid: bf202030c56834a48821b5efa056e674, type: 3}
+  Creature: {fileID: 21300000, guid: 1e7bce591f6e4a0489f46a7ca0d72f9d, type: 3}
 --- !u!4 &1553081566
 Transform:
   m_ObjectHideFlags: 0

@@ -11,6 +11,10 @@ public class Food
     private int width;
     private int height;
     private GameObject foodGameObject;
+    public GameObject creatureObject;
+
+    private Vector2Int creatureGridPosition;
+
     public Sprite squareTile;
 
     public Food(int width, int height)
@@ -21,13 +25,10 @@ public class Food
     public void SetUp(Snake snake)
     {
         Debug.Log("setup running in food");
-
         this.snake = snake;
     }
-
     private Vector2Int randomRangeGenerate()
     {
-
         Vector2Int randomLoc = new Vector2Int(Random.Range(0, width),
            Random.Range(0, height));
         if (!snake.snakeBodyPositions.Contains(randomLoc))
@@ -38,8 +39,6 @@ public class Food
         {
             return randomRangeGenerate();
         }
-
-
     }
 
     public void spawnFoodOnScreen()
@@ -54,7 +53,6 @@ public class Food
     {
         if (foodGridPosition == snakeGridPosition)
         {
-            // Debug.Log("snake Ate Food");
             Object.Destroy(foodGameObject);
             spawnFoodOnScreen();
             return true;
@@ -64,4 +62,5 @@ public class Food
             return false;
         }
     }
+
 }
