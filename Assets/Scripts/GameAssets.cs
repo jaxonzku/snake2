@@ -15,9 +15,11 @@ public class GameAssets : MonoBehaviour
     public Sprite SnakeHead;
     public Sprite SnakeHeadOpen;
     public Sprite SnakeHeadChange;
+    public Sprite SnakeHeadSprite2;
+    public Sprite SnakeBody2;
+    public Sprite SnakeHead2;
+    public Sprite SnakeHeadOpen2;
+    public Sprite SnakeHeadChange2;
     public Sprite Creature;
-
-
-
 
 }

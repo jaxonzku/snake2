@@ -5,8 +5,8 @@ using TMPro;
 
 public class ScoreController : MonoBehaviour
 {
-    private int score = 0;
-    private int increment = 5;
+
+    public int score = 0;
     private TextMeshProUGUI scoreText;
     private void Awake()
     {
@@ -25,6 +25,15 @@ public class ScoreController : MonoBehaviour
         score += increment;
         RefreshUI();
     }
+
+
+
+    public void SetGameOverScore()
+    {
+        scoreText.text = "SCORE : " + score.ToString();
+    }
+
+
 
 
 

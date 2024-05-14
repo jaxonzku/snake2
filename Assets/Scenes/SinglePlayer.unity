@@ -566,6 +566,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   snakeBodyPositions: []
   scoreController: {fileID: 1979220669}
+  lobby: {fileID: 0}
 --- !u!1 &1380872391
 GameObject:
   m_ObjectHideFlags: 0
@@ -575,7 +576,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1380872392}
-  - component: {fileID: 1380872393}
   m_Layer: 0
   m_Name: Border
   m_TagString: Untagged
@@ -602,19 +602,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1380872393
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1380872391}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9f5e214654d3a043ba3fd46ba70ac43, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  singleCell: {fileID: 21300000, guid: 5af452ea6f50972489210ba1eb29e2d3, type: 3}
 --- !u!1 &1551257379
 GameObject:
   m_ObjectHideFlags: 0
@@ -734,6 +721,11 @@ MonoBehaviour:
   SnakeHead: {fileID: 21300000, guid: bf202030c56834a48821b5efa056e674, type: 3}
   SnakeHeadOpen: {fileID: 21300000, guid: 41001f77606bfda4da6e0a4794deab1f, type: 3}
   SnakeHeadChange: {fileID: 21300000, guid: bf202030c56834a48821b5efa056e674, type: 3}
+  SnakeHeadSprite2: {fileID: 0}
+  SnakeBody2: {fileID: 0}
+  SnakeHead2: {fileID: 0}
+  SnakeHeadOpen2: {fileID: 0}
+  SnakeHeadChange2: {fileID: 0}
   Creature: {fileID: 21300000, guid: 1e7bce591f6e4a0489f46a7ca0d72f9d, type: 3}
 --- !u!4 &1553081566
 Transform:
@@ -983,6 +975,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aab77418a3d78bd43bf43add2faf31b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  score: 0
 --- !u!1 &2023353565
 GameObject:
   m_ObjectHideFlags: 0

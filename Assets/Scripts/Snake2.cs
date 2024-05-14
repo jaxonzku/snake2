@@ -33,7 +33,11 @@ public class Snake2 : MonoBehaviour
     private List<GameObject> snakeBodyGameObjects2;
     private Direction gridMoveDirection2;
 
-    public ScoreController scoreController;
+    // public ScoreController scoreController;
+
+    public Score1 score1;
+    public Score2 score2;
+
 
     private enum Direction
     {
@@ -87,7 +91,7 @@ public class Snake2 : MonoBehaviour
     {
         HandleGridMovement();
         HandleInput();
-        BorderHit(2);
+        BorderHit(1);
         BorderHit(2);
         HandleGridMovement2();
         HandleInput2();
@@ -139,9 +143,9 @@ public class Snake2 : MonoBehaviour
             snakeBodyGameObjects.Add(snakeBody.CreateABody(player));
             if (CheckSelfCollision(1))
             {
-                SceneManager.LoadScene(0);
+                SceneManager.LoadScene(3);
             }
-            scoreController.IncrementScore(snakeAteFood ? 5 : 10);
+            score1.IncrementScore1(snakeAteFood ? 5 : 10);
         }
     }
     private void HandleGridMovement2()
@@ -192,7 +196,7 @@ public class Snake2 : MonoBehaviour
             {
                 SceneManager.LoadScene(0);
             }
-            scoreController.IncrementScore(snakeAteFood ? 5 : 10);
+            score2.IncrementScore2(snakeAteFood ? 5 : 10);
         }
     }
 
@@ -233,7 +237,7 @@ public class Snake2 : MonoBehaviour
         {
             for (int i = snakeBodyCount2 - 1; i > 0; i--)
             {
-                snakeBodyGameObjects2[i - 1].GetComponent<SpriteRenderer>().sprite = GameAssets.i.SnakeBody;
+                snakeBodyGameObjects2[i - 1].GetComponent<SpriteRenderer>().sprite = GameAssets.i.SnakeBody2;
                 snakeBodyPositions2[i] = snakeBodyPositions2[i - 1];
                 snakeBodyRotations2[i] = snakeBodyRotations2[i - 1];
                 snakeBodyGameObjects2[i - 1] = snakeBodyGameObjects2[i - 1];
@@ -268,7 +272,7 @@ public class Snake2 : MonoBehaviour
                 Vector3 rotationEulerAngles = new Vector3(0, 0, 0);
                 Quaternion rotationQuaternion = Quaternion.Euler(rotationEulerAngles);
                 newBody.transform.rotation = rotationQuaternion;
-                newBody.GetComponent<SpriteRenderer>().sprite = GameAssets.i.SnakeHead;
+                newBody.GetComponent<SpriteRenderer>().sprite = GameAssets.i.SnakeHead2;
                 return newBody;
 
             }
@@ -398,17 +402,17 @@ public class Snake2 : MonoBehaviour
 
             if (snakeBodyCount2 == 1)
             {
-                snakeBodyGameObjects2[index: 0].gameObject.GetComponent<SpriteRenderer>().sprite = GameAssets.i.SnakeHeadOpen;
+                snakeBodyGameObjects2[index: 0].gameObject.GetComponent<SpriteRenderer>().sprite = GameAssets.i.SnakeHeadOpen2;
 
             }
             else
             {
-                snakeBodyGameObjects2[index: snakeBodyCount2 - 1].gameObject.GetComponent<SpriteRenderer>().sprite = GameAssets.i.SnakeHeadOpen;
+                snakeBodyGameObjects2[index: snakeBodyCount2 - 1].gameObject.GetComponent<SpriteRenderer>().sprite = GameAssets.i.SnakeHeadOpen2;
             }
         }
         else
         {
-            snakeBodyGameObjects2[index: snakeBodyCount2 - 1].gameObject.GetComponent<SpriteRenderer>().sprite = GameAssets.i.SnakeHead;
+            snakeBodyGameObjects2[index: snakeBodyCount2 - 1].gameObject.GetComponent<SpriteRenderer>().sprite = GameAssets.i.SnakeHead2;
         }
 
     }

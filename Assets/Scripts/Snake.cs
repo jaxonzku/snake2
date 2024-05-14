@@ -107,7 +107,10 @@ public class Snake : MonoBehaviour
             snakeBodyGameObjects.Add(snakeBody.CreateABody(player));
             if (CheckSelfCollision())
             {
-                SceneManager.LoadScene(0);
+                PlayerPrefs.SetInt("FinalScore", scoreController.score);
+                PlayerPrefs.Save();
+                SceneManager.LoadScene(3);
+
             }
             scoreController.IncrementScore(snakeAteFood ? 5 : 10);
         }
@@ -136,7 +139,11 @@ public class Snake : MonoBehaviour
         }
         if (CheckSelfCollision())
         {
-            SceneManager.LoadScene(0);
+
+            PlayerPrefs.SetInt("FinalScore", scoreController.score);
+            PlayerPrefs.Save();
+            SceneManager.LoadScene(3);
+
         }
     }
     class SnakeBody
