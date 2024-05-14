@@ -33,7 +33,7 @@ public class Snake : MonoBehaviour
     SnakeBody snakeBody;
     private void Awake()
     {
-        gridMoveTimerMax = .2f;
+        gridMoveTimerMax = .15f;
         gridMoveTimer = gridMoveTimerMax;
         snakeBodyCount = 1;
     }
@@ -54,6 +54,10 @@ public class Snake : MonoBehaviour
         snakeBodyGameObjects = new List<GameObject>(snakeBodyCount);
         snakeBody = new SnakeBody();
         snakeBodyGameObjects.Insert(snakeBodyCount - 1, snakeBody.CreateABody(player));
+        PlayerPrefs.SetInt("FinalScore", 0);
+        PlayerPrefs.SetInt("Player", 1);
+        PlayerPrefs.SetInt("Draw", 0);
+        PlayerPrefs.Save();
     }
     void Update()
     {
@@ -238,9 +242,9 @@ public class Snake : MonoBehaviour
         }
         if (snakeBodyPositions[0].y == 15)
         {
-            gridPosition = new Vector2Int(snakeBodyPositions[0].x, -18);
+            gridPosition = new Vector2Int(snakeBodyPositions[0].x, -19);
         }
-        if (snakeBodyPositions[0].y == -18)
+        if (snakeBodyPositions[0].y == -19)
         {
             gridPosition = new Vector2Int(snakeBodyPositions[0].x, 15);
         }

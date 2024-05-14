@@ -628,8 +628,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1551257379}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 15.78, y: 11.4834, z: 15.058393}
-  m_LocalScale: {x: -0.7, y: 26.099306, z: 1}
+  m_LocalPosition: {x: 15.78, y: 11.4534, z: 15.058393}
+  m_LocalScale: {x: -0.7, y: 26.10184, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1380872392}
@@ -864,7 +864,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.97269624}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -24, y: -26}
+  m_AnchoredPosition: {x: -160.2, y: -49.5}
   m_SizeDelta: {x: 200, y: 34}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1979220667
@@ -915,8 +915,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 59.8
-  m_fontSizeBase: 59.8
+  m_fontSize: 91.2
+  m_fontSizeBase: 91.2
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -977,6 +977,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aab77418a3d78bd43bf43add2faf31b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  score: 0
 --- !u!114 &1979220670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -989,6 +990,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0fd692fff945464fac061303a0a0a0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  score2: 0
 --- !u!1 &2023353565
 GameObject:
   m_ObjectHideFlags: 0
@@ -1129,7 +1131,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 110, y: -34}
+  m_AnchoredPosition: {x: 197.6, y: -51.2}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2084715597
@@ -1144,6 +1146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aab77418a3d78bd43bf43add2faf31b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  score: 0
 --- !u!114 &2084715598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1192,8 +1195,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 59.8
-  m_fontSizeBase: 59.8
+  m_fontSize: 93.6
+  m_fontSizeBase: 93.6
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1254,6 +1257,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 666760c1e8e980440aaf0c13885034d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  score1: 0
 --- !u!1 &2085158194
 GameObject:
   m_ObjectHideFlags: 0

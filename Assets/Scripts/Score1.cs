@@ -5,7 +5,7 @@ using TMPro;
 
 public class Score1 : MonoBehaviour
 {
-    private int score1 = 0;
+    public int score1 = 0;
 
     private TextMeshProUGUI scoreText1;
 

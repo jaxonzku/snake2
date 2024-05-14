@@ -49,13 +49,17 @@ public class Snake2 : MonoBehaviour
 
     SnakeBody snakeBody;
     SnakeBody snakeBody2;
+    private bool snakeInitialized = false;
+    private Vector2Int initialSnakePosition = new Vector2Int(5, 5);
+    private bool snakeInitialized2 = false;
+    private Vector2Int initialSnakePosition2 = new Vector2Int(-5, -5);
 
     private void Awake()
     {
-        gridMoveTimerMax = .2f;
+        gridMoveTimerMax = .15f;
         gridMoveTimer = gridMoveTimerMax;
         snakeBodyCount = 1;
-        gridMoveTimerMax2 = .2f;
+        gridMoveTimerMax2 = .15f;
         gridMoveTimer2 = gridMoveTimerMax;
         snakeBodyCount2 = 1;
     }
@@ -86,6 +90,11 @@ public class Snake2 : MonoBehaviour
         snakeBodyGameObjects2 = new List<GameObject>(snakeBodyCount2);
         snakeBody2 = new SnakeBody();
         snakeBodyGameObjects2.Insert(snakeBodyCount2 - 1, snakeBody2.CreateABody(2));
+
+        PlayerPrefs.SetInt("FinalScore", 0);
+        PlayerPrefs.SetString("Player", "");
+        PlayerPrefs.SetInt("Draw", 0);
+        PlayerPrefs.Save();
     }
     void Update()
     {
@@ -95,15 +104,21 @@ public class Snake2 : MonoBehaviour
         BorderHit(2);
         HandleGridMovement2();
         HandleInput2();
-
+        SnakeBiteCheck();
     }
     private void HandleGridMovement()
     {
+        if (!snakeInitialized)
+        {
+            gridPosition = initialSnakePosition;
+            snakeInitialized = true;
+        }
         gridMoveTimer += Time.deltaTime;
         if (gridMoveTimer > gridMoveTimerMax)
         {
             gridMoveTimer -= gridMoveTimerMax;
             Vector2Int gridMoveDirectionVector;
+
             switch (gridMoveDirection)
             {
                 default:
@@ -143,6 +158,9 @@ public class Snake2 : MonoBehaviour
             snakeBodyGameObjects.Add(snakeBody.CreateABody(player));
             if (CheckSelfCollision(1))
             {
+                PlayerPrefs.SetInt("FinalScore", score2.score2);
+                PlayerPrefs.SetString("Player", "PLAYER 2 WINS");
+                PlayerPrefs.Save();
                 SceneManager.LoadScene(3);
             }
             score1.IncrementScore1(snakeAteFood ? 5 : 10);
@@ -150,6 +168,11 @@ public class Snake2 : MonoBehaviour
     }
     private void HandleGridMovement2()
     {
+        if (!snakeInitialized2)
+        {
+            gridPosition2 = initialSnakePosition2;
+            snakeInitialized2 = true;
+        }
         gridMoveTimer2 += Time.deltaTime;
         if (gridMoveTimer2 > gridMoveTimerMax2)
         {
@@ -194,6 +217,9 @@ public class Snake2 : MonoBehaviour
             snakeBodyGameObjects2.Add(snakeBody2.CreateABody(player));
             if (CheckSelfCollision(2))
             {
+                PlayerPrefs.SetInt("FinalScore", score1.score1);
+                PlayerPrefs.SetString("Player", "PLAYER 1 WINS");
+                PlayerPrefs.Save();
                 SceneManager.LoadScene(0);
             }
             score2.IncrementScore2(snakeAteFood ? 5 : 10);
@@ -222,7 +248,10 @@ public class Snake2 : MonoBehaviour
         }
         if (CheckSelfCollision(1))
         {
-            SceneManager.LoadScene(0);
+            PlayerPrefs.SetInt("FinalScore", score2.score2);
+            PlayerPrefs.SetString("Player", "PLAYER 2 WINS");
+            PlayerPrefs.Save();
+            SceneManager.LoadScene(3);
         }
     }
     private void HandleEachMove2()
@@ -247,7 +276,10 @@ public class Snake2 : MonoBehaviour
         }
         if (CheckSelfCollision(2))
         {
-            SceneManager.LoadScene(0);
+            PlayerPrefs.SetInt("FinalScore", score1.score1);
+            PlayerPrefs.SetString("Player", "PLAYER 1 WINS");
+            PlayerPrefs.Save();
+            SceneManager.LoadScene(3);
         }
     }
     class SnakeBody
@@ -430,9 +462,9 @@ public class Snake2 : MonoBehaviour
             }
             if (snakeBodyPositions[0].y == 15)
             {
-                gridPosition = new Vector2Int(snakeBodyPositions[0].x, -18);
+                gridPosition = new Vector2Int(snakeBodyPositions[0].x, -19);
             }
-            if (snakeBodyPositions[0].y == -18)
+            if (snakeBodyPositions[0].y == -19)
             {
                 gridPosition = new Vector2Int(snakeBodyPositions[0].x, 15);
             }
@@ -449,9 +481,9 @@ public class Snake2 : MonoBehaviour
             }
             if (snakeBodyPositions2[0].y == 15)
             {
-                gridPosition2 = new Vector2Int(snakeBodyPositions2[0].x, -18);
+                gridPosition2 = new Vector2Int(snakeBodyPositions2[0].x, -19);
             }
-            if (snakeBodyPositions2[0].y == -18)
+            if (snakeBodyPositions2[0].y == -19)
             {
                 gridPosition2 = new Vector2Int(snakeBodyPositions2[0].x, 15);
             }
@@ -459,6 +491,31 @@ public class Snake2 : MonoBehaviour
 
 
 
+    }
+    private void SnakeBiteCheck()
+    {
+        if (snakeBodyPositions2[0] == snakeBodyPositions[0])
+        {
+            PlayerPrefs.SetInt("Draw", 1);
+            PlayerPrefs.Save();
+            SceneManager.LoadScene(3);
+        }
+        else if (snakeBodyPositions2.Contains(snakeBodyPositions[0]))
+        {
+            Debug.Log("snake1 bite snake 2");
+            PlayerPrefs.SetInt("FinalScore", score1.score1);
+            PlayerPrefs.SetString("Player", "PLAYER 1 WINS");
+            PlayerPrefs.Save();
+            SceneManager.LoadScene(3);
+        }
+        else if (snakeBodyPositions.Contains(snakeBodyPositions2[0]))
+        {
+            PlayerPrefs.SetInt("FinalScore", score2.score2);
+            PlayerPrefs.SetString("Player", "PLAYER 2 WINS");
+            PlayerPrefs.Save();
+            SceneManager.LoadScene(3);
+
+        }
     }
 
 

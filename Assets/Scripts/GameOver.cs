@@ -9,11 +9,30 @@ public class GameOver : MonoBehaviour
 {
 
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI whoWins;
+
 
     void Start()
     {
         int finalScore = PlayerPrefs.GetInt("FinalScore", 0);
-        scoreText.text = "SCORE : " + finalScore;
+        string whowinsText = PlayerPrefs.GetString("Player");
+        int draw = PlayerPrefs.GetInt("Draw", 0);
+
+        if (draw == 1)
+        {
+            scoreText.text = "   DRAW";
+        }
+        else
+        {
+            scoreText.text = "SCORE : " + finalScore;
+            whoWins.text = whowinsText;
+        }
+
+
+
+
+
+
     }
     public void GoHome()
     {
